@@ -17,18 +17,6 @@
         <build.version>${project.version}</build.version>
     </properties>
 
-    <modules>
-        <module>easybank_bom</module>
-        <module>accounts</module>
-        <module>loans</module>
-        <module>cards</module>
-        <module>message</module>
-        <module>customer</module>
-        <module>gatewayserver</module>
-        <module>configserver</module>
-        <module>eurekaserver</module>
-    </modules>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -42,6 +30,15 @@
     </dependencyManagement>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -69,6 +66,23 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>all-modules</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>easybank_bom</module>
+                <module>accounts</module>
+                <module>loans</module>
+                <module>cards</module>
+                <module>message</module>
+                <module>customer</module>
+                <module>gatewayserver</module>
+                <module>configserver</module>
+                <module>eurekaserver</module>
+            </modules>
+        </profile>
         <profile>
             <id>run-accounts</id>
             <modules>
@@ -117,6 +131,5 @@
                 <module>eurekaserver</module>
             </modules>
         </profile>
-        <!-- Define profiles for other submodules similarly -->
     </profiles>
 </project>
