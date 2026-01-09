@@ -1,4 +1,91 @@
-# Important Links
+# EasyBank Microservices
+
+This project is a Maven multi-module microservices application for EasyBank, featuring various services for managing accounts, loans, cards, and more.
+
+## Project Structure
+
+The project is organized as a multi-module Maven project with a centralized BOM (Bill of Materials) for dependency management.
+
+- **`microservices-parent` (Root)**: The aggregator and parent POM for all modules.
+- **`easybank_bom`**: Contains the Bill of Materials and build requirements.
+- **`accounts`**: Microservice for managing customer accounts.
+- **`loans`**: Microservice for managing loans.
+- **`cards`**: Microservice for managing cards.
+- **`customer`**: Microservice for managing customer details.
+- **`gatewayserver`**: API Gateway for routing requests.
+- **`configserver`**: Centralized configuration management using Spring Cloud Config.
+- **`eurekaserver`**: Service discovery using Netflix Eureka.
+- **`message`**: Messaging service for handling notifications.
+
+## Prerequisites
+
+- **Java 21** or later
+- **Maven 3.9** or later
+- **Docker** (for containerization)
+
+## Build and Compilation
+
+### Full Project Build
+To build the entire project and install all modules to the local repository (skipping tests):
+```bash
+mvn clean install -DskipTests
+```
+
+### Individual Module Compilation
+To compile a specific module from the root directory:
+```bash
+mvn compile -pl <module-name>
+```
+Example: `mvn compile -pl accounts`
+
+## Running the Application
+
+### Using Maven Profiles (Recommended)
+Specific profiles are configured in the root `pom.xml` for each service:
+
+| Service | Run Command |
+| :--- | :--- |
+| Accounts | `mvn spring-boot:run -P run-accounts` |
+| Loans | `mvn spring-boot:run -P run-loans` |
+| Cards | `mvn spring-boot:run -P run-cards` |
+| Message | `mvn spring-boot:run -P run-messages` |
+| Customer | `mvn spring-boot:run -P run-customers` |
+| Gateway Server | `mvn spring-boot:run -P run-gatewayserver` |
+| Config Server | `mvn spring-boot:run -P run-configserver` |
+| Eureka Server | `mvn spring-boot:run -P run-eurekaserver` |
+
+### Using Project List flag
+Alternatively, you can run a module using the `-pl` flag:
+```bash
+mvn spring-boot:run -pl <module-name>
+```
+
+## Containerization
+
+### Google Jib (Recommended)
+Build Docker images without a Dockerfile using Google Jib:
+```bash
+mvn compile jib:dockerBuild -pl <module-name>
+```
+
+### Spring Boot Buildpacks
+```bash
+mvn spring-boot:build-image -pl <module-name>
+```
+
+## Useful Maven Commands
+
+| Goal | Command | Description |
+| :--- | :--- | :--- |
+| **Dependency Tree** | `mvn dependency:tree -pl <module>` | Visualize dependency hierarchy and resolve conflicts. |
+| **Effective POM** | `mvn help:effective-pom -pl <module>` | View the final merged POM after inheritance and interpolation. |
+| **Check Updates** | `mvn versions:display-dependency-updates` | Check for newer versions of dependencies in the project. |
+| **Specific Test** | `mvn test -Dtest=<TestClassName>` | Run a single test class across the project. |
+| **Module Tests** | `mvn test -pl <module>` | Run tests only for a specific module. |
+| **Force Update** | `mvn clean install -U` | Force update of snapshots and releases from remote repositories. |
+| **Verify Project** | `mvn verify` | Run all checks (tests, ITs, etc.) and verify project integrity. |
+
+## Important Links
 - Spring Boot - https://spring.io/projects/spring-boot
 - Create SpringBoot project - https://start.spring.io
 - DTO pattern blog - https://martinfowler.com/eaaCatalog/dataTransferObject.html
@@ -49,19 +136,8 @@
 - Ingress Controllers - https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
 - Istio (Service mesh) - https://istio.io
 
-
-## Maven Commands for reference
-
-|     Maven Command       |     Description          |
-| ------------- | ------------- |
-| "mvn clean install -Dmaven.test.skip=true" | To generate a jar inside target folder |
-| "mvn spring-boot:run" | To start a springboot maven project |
-| "mvn spring-boot:build-image" | To generate a docker image using Buildpacks. No need of Dockerfile |
-| "mvn compile jib:dockerBuild" | To generate a docker image using Google Jib. No need of Dockerfile |
-
-
 ## Apache Benchmark commands for reference
 
 |     Apache Benchmark command      |     Description          |
 | ------------- | ------------- |
-| "ab -n 10 -c 2 -v 3 http://localhost:8072/eazybank/cards/api/contact-info" | To perform load testing on API by sending 10 requests |
+| `ab -n 10 -c 2 -v 3 http://localhost:8072/eazybank/cards/api/contact-info` | To perform load testing on API by sending 10 requests |
