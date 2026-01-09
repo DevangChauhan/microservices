@@ -1,0 +1,58 @@
+name: EasyBank CI
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - '**/src/**'
+      - '**/pom.xml'
+      - '.github/workflows/ci.yml'
+      - '.gitmodules'
+      - 'accounts'
+      - 'cards'
+      - 'configserver'
+      - 'customer'
+      - 'easybank_bom'
+      - 'eurekaserver'
+      - 'gatewayserver'
+      - 'loans'
+      - 'message'
+
+# Cancel in-progress runs for the same branch to save resources
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          # Fetches all submodules to ensure Maven can build the entire project
+          submodules: recursive
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build with Maven
+        run: >
+          mvn clean install -DskipTests 
+          --batch-mode 
+          --no-transfer-progress 
+          --errors
+
+      - name: Upload Build Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-build-logs
+          path: '**/target/*.log'
+          if-no-files-found: ignore

@@ -73,6 +73,23 @@ mvn compile jib:dockerBuild -pl <module-name>
 mvn spring-boot:build-image -pl <module-name>
 ```
 
+## Continuous Integration
+
+A GitHub Actions CI pipeline is configured to automatically build the project whenever a commit is pushed to the `main` or `master` branches. This includes changes to any of the microservice source files, the parent POM, or when submodule references are updated in the parent repository.
+
+- **Workflow File**: `.github/workflows/ci.yml`
+- **Triggers**:
+  - Push to `main` or `master` branches.
+  - Path filters include all microservice source files (`**/src/**`), `pom.xml` files, and `.gitmodules`.
+- **Key Features**:
+  - **Recursive Submodule Checkout**: Ensures all dependent microservices are available for the build.
+  - **Concurrency Control**: Automatically cancels older runs if a new push is made to the same branch.
+  - **Optimized Maven Execution**: Uses batch mode and suppressed progress logs for cleaner CI output.
+  - **Artifact Archiving**: Build logs are uploaded as artifacts for troubleshooting.
+- **Actions**:
+  - Sets up Java 21 environment.
+  - Builds all modules using `mvn clean install -DskipTests`.
+
 ## Useful Maven Commands
 
 | Goal | Command | Description |
