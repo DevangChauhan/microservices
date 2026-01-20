@@ -1,39 +1,39 @@
 [submodule "accounts"]
-	path = accounts
-	url = git@github.com:DevangChauhan/accounts.git
+        path = accounts
+        url = https://github.com/DevangChauhan/accounts.git
 [submodule "loans"]
-	path = loans
-	url = git@github.com:DevangChauhan/loans.git
+        path = loans
+        url = https://github.com/DevangChauhan/loans.git
 [submodule "cards"]
-	path = cards
-	url = git@github.com:DevangChauhan/cards.git
+        path = cards
+        url = https://github.com/DevangChauhan/cards.git
 [submodule "configserver"]
-	path = configserver
-	url = git@github.com:DevangChauhan/configserver.git
+        path = configserver
+        url = https://github.com/DevangChauhan/configserver.git
 [submodule "message"]
-	path = message
-	url = git@github.com:DevangChauhan/message.git
+        path = message
+        url = https://github.com/DevangChauhan/message.git
 [submodule "customer"]
-	path = customer
-	url = git@github.com:DevangChauhan/customer.git
+        path = customer
+        url = https://github.com/DevangChauhan/customer.git
 [submodule "easybank_bom"]
-	path = easybank_bom
-	url = git@github.com:DevangChauhan/easybank_bom.git
+        path = easybank_bom
+        url = https://github.com/DevangChauhan/easybank_bom.git
 [submodule "eurekaserver"]
-	path = eurekaserver
-	url = git@github.com:DevangChauhan/eurekaserver.git
+        path = eurekaserver
+        url = https://github.com/DevangChauhan/eurekaserver.git
 [submodule "gatewayserver"]
-	path = gatewayserver
-	url = git@github.com:DevangChauhan/gatewayserver.git
+        path = gatewayserver
+        url = https://github.com/DevangChauhan/gatewayserver.git
 [submodule "docker-compose"]
-	path = docker-compose
-	url = git@github.com:DevangChauhan/docker-compose.git
+        path = docker-compose
+        url = https://github.com/DevangChauhan/docker-compose.git
 [submodule "k8s"]
-	path = k8s
-	url = git@github.com:DevangChauhan/k8s.git
+        path = k8s
+        url = https://github.com/DevangChauhan/k8s.git
 [submodule "helm"]
-	path = helm
-	url = git@github.com:DevangChauhan/helm.git
+        path = helm
+        url = https://github.com/DevangChauhan/helm.git
 [submodule "easybank-config"]
-	path = easybank-config
-	url = git@github.com:DevangChauhan/easybank-config.git
+        path = easybank-config
+        url = https://github.com/DevangChauhan/easybank-config.git
